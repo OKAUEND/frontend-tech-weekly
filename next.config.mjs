@@ -4,6 +4,9 @@ import createMDX from "@next/mdx";
 const nextConfig = {
   output: "export",
   pageExtensions: ["tsx", "mdx", "md"],
+  eslint: {
+    dirs: ["src"], // Only run ESLint on the 'pages' and 'utils' directories during production builds (next build)
+  },
 };
 
 const withMDX = createMDX({
