@@ -11,4 +11,17 @@ export default defineWorkspace([
       environment: "node",
     },
   },
+  {
+    test: {
+      include: [
+        "src/**/browser/**/*.{test,spec}.{ts,tsx}",
+        "src/**/__tests__/**/*.browser.{test,spec}.ts",
+      ],
+      name: "browser",
+      browser: {
+        enabled: true,
+        name: "chrome",
+      },
+    },
+  },
 ]);
