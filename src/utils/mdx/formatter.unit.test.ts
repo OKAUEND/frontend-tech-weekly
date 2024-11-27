@@ -16,4 +16,26 @@ describe("parseFrontMatter", () => {
       content: source,
     });
   });
+  test("フロントマターがある場合には、フロントマターが解析されその情報が返されること", () => {
+    const source = `---
+title: "Hello"
+description: "World"
+date: "2021-01-01"
+tags:
+  - "test"
+  - "vitest"
+---
+# Hello World`;
+    const result = parseFrontMatter(source);
+
+    expect(result).toMatchObject({
+      frontmatter: {
+        title: "Hello",
+        description: "World",
+        date: "2021-01-01",
+        tags: ["test", "vitest"],
+      },
+      content: "# Hello World",
+    });
+  });
 });
