@@ -38,6 +38,36 @@ export const parseFrontMatter = (source: string): ParsedContent => {
     throw new Error("フロントマターの終了が定義できていません");
   }
 
+  //フロントマター部分を取り出す
+  const frontmatterRaw = source
+    .slice(frontmatterStartHyphen + 3, frontmatterEndHyphen)
+    .trim();
+
+  /**
+   * 記事のタイトル
+   */
+  const frontmatterTitle = frontmatterRaw.match(/title:\s*"?([^"\n]+)"?/);
+
+  /**
+   * 記事の説明文
+   */
+  const frontmatterDescription = frontmatterRaw.match(
+    /description:\s*"?([^"\n]+)"?/
+  );
+
+  /**
+   * 記事の日時
+   */
+  const frontmatterDate = frontmatterRaw.match(/description:\s*"?([^"\n]+)"?/);
+
+  /**
+   * 記事のタグ(複数)
+   */
+  // タグは複数存在する可能性があるため、別途パースを行う
+  const frontmatterTagsRegex = frontmatterRaw.match(
+    /tags:\s*\n((?:\s*-\s*"?[^"\n]+"?\n?)+)/
+  );
+
   return {
     frontmatter: {
       title: "title",
