@@ -23,6 +23,7 @@ export default [
     rules: {
       semi: "off",
       "@typescript-eslint/no-unused-vars": "error",
+      "no-console": "error",
     },
   },
   {
