@@ -19,6 +19,13 @@ tags:
       "フロントマターの設定を取得できません"
     );
   });
+  test("フロントマターの終わりのHyphenがない場合、エラー値が返される事", () => {
+    const source = `---`;
+
+    expect(() => parseFrontMatter(source)).toThrowError(
+      "フロントマターの終了が定義できていません"
+    );
+  });
   test("フロントマターがある場合には、フロントマターが解析されその情報が返されること", () => {
     const result = parseFrontMatter(MOCK_MARKDOWN);
 

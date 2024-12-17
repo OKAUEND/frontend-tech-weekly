@@ -29,6 +29,15 @@ export const parseFrontMatter = (source: string): ParsedContent => {
     throw new Error("フロントマターの設定を取得できません");
   }
 
+  const frontmatterEndHyphen = source.indexOf(
+    "---",
+    frontmatterStartHyphen + 3
+  );
+
+  if (frontmatterEndHyphen === -1) {
+    throw new Error("フロントマターの終了が定義できていません");
+  }
+
   return {
     frontmatter: {
       title: "title",
