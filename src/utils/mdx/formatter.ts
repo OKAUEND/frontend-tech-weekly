@@ -22,6 +22,13 @@ export type ParsedContent = {
  * @returns FrontMatterとコンテンツの情報を含むオブジェクト
  */
 export const parseFrontMatter = (source: string): ParsedContent => {
+  //フロントマターの開始インデックスの3つのハイフンを探す
+  const frontmatterStartHyphen = source.indexOf("---");
+
+  if (frontmatterStartHyphen === -1) {
+    throw new Error("フロントマターの設定を取得できません");
+  }
+
   return {
     frontmatter: {
       title: "title",
