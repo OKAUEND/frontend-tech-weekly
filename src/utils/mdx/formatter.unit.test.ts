@@ -12,6 +12,16 @@ tags:
 ---
 # Hello World`;
 
+  const MOCK_MARKDOWN_NO_FRONTMATTER = `---
+title: ""
+description: ""
+date: ""
+tags:
+  - ""
+  - ""
+---
+# Hello World`;
+
   test("フロントマターがない場合、エラー値が返される事", () => {
     const source = "# Hello World";
 
@@ -24,6 +34,11 @@ tags:
 
     expect(() => parseFrontMatter(source)).toThrowError(
       "フロントマターの終了が定義できていません"
+    );
+  });
+  test("フロントマターに必要な情報が含まれていない場合、エラーが発生するか", () => {
+    expect(() => parseFrontMatter(MOCK_MARKDOWN_NO_FRONTMATTER)).toThrowError(
+      "記事に必要な設定情報が存在しません"
     );
   });
   test("フロントマターがある場合には、フロントマターが解析されその情報が返されること", () => {
