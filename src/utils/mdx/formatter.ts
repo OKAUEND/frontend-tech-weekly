@@ -68,6 +68,22 @@ export const parseFrontMatter = (source: string): ParsedContent => {
     /tags:\s*\n((?:\s*-\s*"?[^"\n]+"?\n?)+)/
   );
 
+  console.log({ frontmatterTitle });
+
+  if (
+    !frontmatterTitle ||
+    !frontmatterDescription ||
+    !frontmatterDate ||
+    !frontmatterTagsRegex
+  ) {
+    throw new Error("記事に必要な設定情報が存在しません");
+  }
+  // タグを配列へ変換を行う
+  const tags = frontmatterTagsRegex[1]
+    .trim()
+    .split("\n")
+    .map((tag) => tag.replace(/^\s*-\s*"?|"?$|^\s+|\s+$/g, ""));
+
   return {
     frontmatter: {
       title: "title",
